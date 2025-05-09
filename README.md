@@ -88,3 +88,23 @@ To change a zone's highlight color, write a hex color value in RRGGBB format to 
 You can read the current color of a zone using `cat`:
 ```bash
 cat /sys/devices/platform/hp-wmi/rgb_zones/zone00_rgb
+
+Hotkeys
+Omen-specific and other special hotkeys (brightness, volume, etc.) are mapped to regular X11 keysyms. You can use your desktop environment's (KDE, GNOME, XFCE, etc.) built-in hotkey or keyboard shortcut manager to assign these keysyms to desired functions, just like any other key.
+Other Features
+Refer to the standard documentation for the platform_profile and hwmon sysfs interfaces for controlling performance modes and monitoring hardware, if supported by your laptop model.
+To Do / Future Enhancements:
+RGB Keyboard:
+FourZone brightness control (if WMI interface supports it).
+Support for keyboard lighting animations (if WMI interface supports it).
+More robust detection of RGB keyboard capabilities at module load time.
+Fan Control:
+Explore more granular fan control options beyond the basic "max fan" mode, if exposed by WMI/EC.
+General:
+Continuously sync with upstream hp-wmi module for bug fixes and new features.
+Investigate and document any model-specific WMI commands or behaviors.
+Troubleshooting
+"Permission denied" when writing to sysfs files: Ensure you are using sudo correctly, for example: echo "RRGGBB" | sudo tee /path/to/sysfs/file.
+Module does not load / acpi_status_to_errno error during build (older issue): This specific build issue related to acpi_status_to_errno should be resolved in this version by adapting the error handling. If you encounter build issues, ensure your kernel headers are correctly installed and match your running kernel.
+RGB colors don't change: Make sure the keyboard backlight is first enabled using the laptop's Fn-key shortcut. Check dmesg for any errors from the hp_wmi module.
+Contributions and feedback are welcome!
